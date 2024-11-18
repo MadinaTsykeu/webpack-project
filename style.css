@@ -54,7 +54,7 @@ button:focus {
   border-radius: 50%; }
 
 .menu-block {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.95);
   position: absolute;
@@ -81,7 +81,7 @@ button:focus {
   z-index: 5;
   flex: 1 1;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   box-shadow: -2px 0 4px 0 rgba(69, 79, 126, 0.02), 16px 0 52px 0 rgba(14, 24, 80, 0.2); }
   .header-menu::-webkit-scrollbar {
     display: none; }
@@ -769,18 +769,7 @@ h3 {
 
 @media (min-width: 320px) {
   body {
-    overflow-x: hidden; }
-  .swiper {
-    margin-left: 16px;
-    width: calc(100vw - 16px);
-    overflow: visible; }
-  .swiper-wrapper {
-    margin-left: 0; }
-  .swiper-slide {
-    width: calc((100vw - 32px) * 0.9) !important;
-    margin-right: 16px; }
-    .swiper-slide:last-child {
-      margin-right: 0; } }
+    overflow-x: hidden; } }
 
 @media (min-width: 1120px) {
   .swiper-slide {
@@ -802,7 +791,10 @@ h3 {
 
 @media (max-width: 768px) {
   .header__burger-logo:before {
-    display: none; } }
+    display: none; }
+  .services__logo {
+    width: 100%;
+    height: auto; } }
 
 @media (min-width: 768px) {
   .header-menu {
@@ -1014,7 +1006,7 @@ h3 {
   .menu-block {
     left: 0;
     display: block;
-    height: auto;
+    height: 100vh;
     width: auto;
     position: relative;
     left: 0;
