@@ -26,20 +26,23 @@ const createSlider = () => {
   if (breakpointSwiper.matches) {
     sliders = new Swiper('.swiper', {
       direction: 'horizontal',
-        slidesPerView: 1.4,      
-        spaceBetween: 8,      
+      spaceBetween: 16,
+
       pagination: {
         el: '.swiper-pagination',
-        clickable: true,
-      },
-    });
-  } else if (swiper.classList.contains('swiper-initialized')) {
-    sliders.destroy();
-    sliders = null; 
+        clickable: true
+      }
+    })
+  } else {
+    if (swiper.classList.contains('swiper-initialized')) {
+      for (let slider of sliders) {
+        slider.destroy()
+      }
+    }
   }
-};
+}
+createSlider()
 
-createSlider();
 breakpointSwiper.addEventListener('change', createSlider);
 
 const brands = body.querySelector('.brands');
@@ -78,7 +81,6 @@ const headerMenuBtnClose = headerMenu.querySelector('.header-menu__btn-close');
 const toggleMenu = () => {
   const isActive = burgerOverlay.classList.toggle('menu-block--active');
   headerMenu.classList.toggle('header-menu--active', isActive);
-  body.classList.toggle('body-fixed', isActive);
 };
 
 burgerOverlay.addEventListener('click', (e) => {
@@ -101,15 +103,11 @@ const modals = (buttons, modal, closeBtn, openClass) => {
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       modal.classList.add(openClass);
-      body.classList.add('body-fixed');
     });
   });
 
   const closeModal = () => {
     modal.classList.remove(openClass);
-    if (!headerMenu.classList.contains('header-menu--active')) {
-      body.classList.remove('body-fixed');
-    }
   };
 
   closeBtn.addEventListener('click', closeModal);
@@ -129,3 +127,10 @@ const inputFocusFunction = (input) => () => input.focus();
 
 modalCall.addEventListener('transitionstart', inputFocusFunction(modalCallInput));
 modalFeedback.addEventListener('transitionstart', inputFocusFunction(modalFeedbackInput));
+
+const menuBlock = document.querySelector('.menu-block');
+const headerMenuBtn = document.querySelector('.header-menu__btn-close');
+
+headerMenuBtn.addEventListener('click', () => {
+  menuBlock.classList.toggle('menu-block--active');
+});
